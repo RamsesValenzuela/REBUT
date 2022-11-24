@@ -14,7 +14,7 @@ export const Job = sequelize.define("jobs", {
     allowNull: false,
   },
   sector: {
-    type: DataType.STRING(120),
+    type: DataType.STRING(60),
     allowNull: false,
     unique: true
   },

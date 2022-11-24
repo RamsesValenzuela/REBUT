@@ -33,4 +33,15 @@ export const Company = sequelize.define("companies", {
     type: DataType.STRING(40),
     allowNull: false,
   }
+},{ timestamps: true ,
+  hooks:{
+    beforeCreate: async(admin)=>{
+      const salt = await bcrypt.genSalt(10);
+      admin.password = await bcrypt.hash(admin.password, salt);
+    }
+  }
 });
+
+Company.prototype.verifyPassword = function(password){
+  return bcrypt.compareSync(password, this.password);
+}
